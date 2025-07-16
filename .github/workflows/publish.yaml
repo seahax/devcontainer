@@ -46,7 +46,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
       - name: build-and-push
         id: push
-        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        uses: docker/build-push-action@v6
         with:
           context: .
           platforms: ${{ matrix.platform }}
