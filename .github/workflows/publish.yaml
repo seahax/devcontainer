@@ -17,6 +17,12 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        architecture:
+          - linux/amd64
+          - linux/arm64
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -35,12 +41,15 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha
+            type=raw,value=latest,enable={{is_default_branch}}
       - name: build-and-push
         id: push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ matrix.platform }}
           tags: ${{ steps.meta.outputs.tags }},ghcr.io/${{ github.repository }}:latest
           labels: ${{ steps.meta.outputs.labels }}
           push: true
