@@ -6,7 +6,7 @@ ENTRYPOINT ["/usr/bin/zsh", "-l"]
 
 # Install OS packages
 RUN apt-get update -y && apt-get install -y git vim
-RUN yes | /usr/local/sbin/unminimize
+RUN yes | unminimize
 
 # Initialize the user
 USER vscode
