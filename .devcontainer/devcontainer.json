@@ -57,6 +57,5 @@
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.npmrc,target=/home/vscode/.npmrc,type=bind",
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws,type=bind"
-  ],
-  "name": "Seahax Dev Container"
+  ]
 }
