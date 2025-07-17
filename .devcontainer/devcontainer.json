@@ -1,6 +1,19 @@
 {
+  // "image": "ghcr.io/seahax/devcontainer:latest",
+  "dockerFile": "../Dockerfile",
+  "features": {
+    // Allow the dev container to access the host's Docker daemon.
+    "ghcr.io/devcontainers/features/docker-in-docker:2": { }
+  },
+	"mounts": [
+    // Mount the host's home directory to the container. Useful for accessing
+    // credentials and configuration files stored in the home directory.
+		"source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.host,type=bind"
+	],
+  "onCreateCommand": "zsh .devcontainer/on-create.zsh",
   "customizations": {
     "vscode": {
+      // Shared VSCode extensions.
       "extensions": [
         "bierner.markdown-preview-github-styles",
         "byi8220.indented-block-highlighting",
@@ -27,8 +40,11 @@
         "Redocly.openapi-vs-code",
         "maattdd.gitless",
         "Gruntfuggly.todo-tree",
-        "vitest.explorer"
+        "vitest.explorer",
+        "ms-python.python",
+        "tamasfe.even-better-toml"
       ],
+      // Shared VSCode settings.
       "settings": {
         "editor.codeActionsOnSave": [
           "source.sortPackageJson"
@@ -49,13 +65,5 @@
         }
       }
     }
-  },
-  "dockerFile": "../Dockerfile",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": { }
-  },
-  "mounts": [
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.npmrc,target=/home/vscode/.npmrc,type=bind",
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/home/vscode/.aws,type=bind"
-  ],
+  }
 }

@@ -15,14 +15,8 @@ zstyle ':omz:update' mode disabled
 zstyle ":completion:*:commands" rehash 1
 source $ZSH/oh-my-zsh.sh
 
-alias g=git
-alias n=npm
-alias p=pnpm
-
 for file in "$HOME/.zshrc.d/*.zsh"(N); do
   source "$file"
 done
 
-for file in "/workspaces/devcontainer/.zshrc.d/*.zsh"(N); do
-  source "$file"
-done
+true
