@@ -31,11 +31,12 @@ If you don't want the VSCode customizations and settings, then this is the minim
 ```json
 {
   "dockerFile": "ghcr.io/seahax/devcontainer:latest",
+  "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": { }
   },
 	"mounts": [
-		"source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.host,type=bind"
+		"source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"
 	],
   "onCreateCommand": "zsh .devcontainer/on-create.zsh",
 }
