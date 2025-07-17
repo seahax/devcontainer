@@ -1,4 +1,5 @@
 # Install Mise tools if the repo has a local Mise config.
+mise trust -a
 mise install -q -y
 
 # Restore JS package manager dependencies.
