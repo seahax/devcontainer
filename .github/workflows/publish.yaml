@@ -45,3 +45,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
+          secrets: |
+            "github_token=${{ secrets.GITHUB_TOKEN }}"

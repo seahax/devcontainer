@@ -4,6 +4,8 @@ ARG TARGETARCH
 SHELL ["/usr/bin/zsh", "-l", "-c"]
 ENTRYPOINT ["/usr/bin/zsh", "-l"]
 
+RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN
+
 # Install global packages and tools
 RUN <<EOF
   set -e
