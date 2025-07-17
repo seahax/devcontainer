@@ -6,21 +6,25 @@ mise install -q -y
 [ -f yarn.lock ] && yarn install --frozen-lockfile
 [ -f pnpm-lock.yaml ] && pnpm install --frozen-lockfile
 
-# Link mounted host config and credentials files.
-HOST_LINKED_CONFIGS=(
-  .aws .aws
+# Setup persistent host config
+REMOTE_HOME_DIR="$HOME/.remote"
+REMOTE_LINKED_CONFIGS=(
+  .aws/config .aws/config
+  .aws/credentials .aws/credentials
   .npmrc .npmrc
+  # Host doctl config won't work. Using a separate one for persistence.
+  "Library/Application Support/doctl/seahax-devcontainer-doctl.yaml" .config/doctl/config.yaml
 )
-for ((i = 1; i <= $#HOST_LINKED_CONFIGS; i += 2)); do
-  local host_config="${HOST_LINKED_CONFIGS[i]}"
-  local local_config="${HOST_LINKED_CONFIGS[i+1]}"
-  if [ -e "$HOME/.host/$host_config" ] && [ ! -e "$HOME/$local_config" ]; then
-    echo "Linking $HOME/.host/$host_config to $HOME/$local_config"
-    mkdir -p "$(dirname "$HOME/$local_config")"
-    ln -s "$HOME/.host/$host_config" "$HOME/$local_config"
+for ((i = 1; i <= $#REMOTE_LINKED_CONFIGS; i += 2)); do
+  local host_config="$REMOTE_HOME_DIR/${REMOTE_LINKED_CONFIGS[i]}"
+  local local_config="$HOME/${REMOTE_LINKED_CONFIGS[i+1]}"
+  if [ ! -e "$local_config" ]; then
+    echo "Linking $host_config to $local_config"
+    mkdir -p "$(dirname "$host_config")"
+    touch "$host_config"
+    mkdir -p "$(dirname "$local_config")"
+    ln -s "$host_config" "$local_config"
   fi
 done
-
-# TODO: Pull in the doctl access token if it exists.
 
 true
