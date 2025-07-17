@@ -12,7 +12,8 @@ on:
   schedule:
     - cron: "0 0 * * 0"
 concurrency:
-  group: ${{ github.workflow }}
+  group: ${{ github.workflow }}${{ github.event_name == 'pull_request' && '-pr' || '' }}
+  cancel-in-progress: true
 permissions:
   contents: read
   packages: write
