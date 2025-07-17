@@ -15,6 +15,17 @@ Docker image for Dev Containers with pre-configured development tools.
   - go
   - java
   - rustc
+  
+# Shared Configs
+
+Files that are linked from the remote (host) machine into the container's home directory
+
+(Requires the [.devcontainer/on-create.zsh](.devcontainer/on-create.zsh) script.)
+
+- AWS: `aws` -> `.aws`
+- NPM: `.npmrc` -> `.npmrc`
+- Doctl: `.config/doctl/config.yaml` -> `.config/doctl/config.yaml`
+- Doctl (mac): `Library/Application Support/doctl/seahax-devcontainer-doctl.yaml` -> `.config/doctl/config.yaml`
 
 ## Getting Started
 
