@@ -13,8 +13,12 @@ RUN <<EOF
     tee /etc/apt/keyrings/mise-archive-keyring.gpg 1> /dev/null
   echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=${TARGETARCH}] https://mise.jdx.dev/deb stable main" | \
     tee /etc/apt/sources.list.d/mise.list
+  sed -i '/path-exclude/s/^/#/' /etc/dpkg/dpkg.cfg.d/excludes
   apt update -y
   apt install -y git vim mise
+  apt --reinstall install man-db manpages manpages-dev manpages-posix manpages-posix-dev -y
+  mv /usr/bin/man.REAL /usr/bin/man
+  mandb -c
 EOF
 
 # Initialize the user
