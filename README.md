@@ -16,7 +16,7 @@ Docker image for Dev Containers with pre-configured development tools.
   - java
   - rustc
   
-# Shared Configs
+## Shared Configs
 
 Files that are linked from the remote (host) machine into the container's home directory
 
