@@ -14,9 +14,9 @@ RUN <<EOF
   echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=${TARGETARCH}] https://mise.jdx.dev/deb stable main" | \
     tee /etc/apt/sources.list.d/mise.list
   sed -i '/path-exclude/s/^/#/' /etc/dpkg/dpkg.cfg.d/excludes
-  apt update -y
-  apt install -y git vim mise
-  apt --reinstall install man-db manpages manpages-dev manpages-posix manpages-posix-dev -y
+  apt-get update -y
+  apt-get install -y git vim mise
+  apt-get --reinstall install man-db manpages manpages-dev manpages-posix manpages-posix-dev -y
   mv /usr/bin/man.REAL /usr/bin/man
   mandb -c
 EOF
