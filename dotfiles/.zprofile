@@ -5,7 +5,7 @@
 
 export LANG=en_US.UTF-8
 export EDITOR=vim
-export AWS_REGION=us-west-2
+export AWS_REGION=us-east-1
 export PNPM_HOME="$HOME/.pnpm"
 
 path=(
