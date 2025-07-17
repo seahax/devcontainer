@@ -1,5 +1,6 @@
 {
   "image": "ghcr.io/seahax/devcontainer:latest",
+  "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest",
   "features": {
     // Allow the dev container to access the host's Docker daemon.
     "ghcr.io/devcontainers/features/docker-in-docker:2": { }
