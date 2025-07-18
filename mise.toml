@@ -4,3 +4,6 @@ AWS_REGION = "us-west-2"
 
 [tasks.build]
 run = "docker build -t devcontainer ."
+
+[tasks.buildx]
+run = "docker buildx build --platform linux/arm64,linux/amd64 -t devcontainer ."

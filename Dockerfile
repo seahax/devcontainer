@@ -21,7 +21,10 @@ RUN <<EOF
   mandb -c
 EOF
 
-# Initialize the user
+# Initialize system config
+COPY rootfiles/ /
+
+# Initialize user config
 USER vscode
 WORKDIR /home/vscode
 COPY --chown=vscode:vscode dotfiles/ ./
