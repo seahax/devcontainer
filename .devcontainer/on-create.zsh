@@ -1,2 +1,2 @@
 # Run the container provided on create script.
-"$HOME/.devcontainer-on-create"
+"$HOME/.devcontainer-on-create.zsh"
