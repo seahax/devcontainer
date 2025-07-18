@@ -1,5 +1,6 @@
 {
   "image": "ghcr.io/seahax/devcontainer:latest",
+  // Update the image to the latest version before rebuild.
   "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest",
   "features": {
     // Allow the dev container to access the host's Docker daemon.
