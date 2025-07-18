@@ -3,7 +3,7 @@ AWS_PROFILE = "seahax"
 AWS_REGION = "us-west-2"
 
 [tasks.build]
-run = "docker build -t devcontainer ."
+run = "docker build -t seahax/devcontainer ."
 
 [tasks.buildx]
-run = "docker buildx build --platform linux/arm64,linux/amd64 -t devcontainer ."
+run = "docker buildx build --platform linux/arm64,linux/amd64 -t seahax/devcontainer ."
