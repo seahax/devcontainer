@@ -4,36 +4,37 @@ Docker image for Dev Containers with pre-configured development tools.
 
 ## Tools
 
-- git
-- vim
-- mise
-  - aws
-  - doctl
-  - node
-  - pnpm
-  - python
-  - go
-  - java
-  - rustc
-  
+Tools are provided by [Mise](https://mise.com), and the following tools are pre-installed in the container:
+
+- AWS CLI
+- Digital Ocean CLI (Doctl)
+- Node.js
+- PNPM
+- Python
+- Go
+- Java
+- Rust
+
 ## Shared Configs
 
-Files that are linked from the remote (host) machine into the container's home directory
+Symlinks are created in the container home directory that point to files in the remote home directory.
 
-(Requires the [.devcontainer/on-create.zsh](.devcontainer/on-create.zsh) script.)
+> Requires the [.devcontainer/on-create.zsh](.devcontainer/on-create.zsh) script.
 
-- AWS: `aws` -> `.aws`
-- NPM: `.npmrc` -> `.npmrc`
-- Doctl: `.config/doctl/config.yaml` -> `.config/doctl/config.yaml`
-- Doctl (mac): `Library/Application Support/doctl/seahax-devcontainer-doctl.yaml` -> `.config/doctl/config.yaml`
+- SSH (RSA): `.ssh/id_rsa`
+- SSH (EdDSA): `.ssh/id_ed25519`
+- AWS: `.aws`
+- NPM: `.npmrc`
+- Doctl: `.config/doctl/config.yaml`
+  - NOTE: This is not linked to the remote Doctl config, because its not safe
+    to share. It's linked to a separate file purely for persistence across
+    rebuilds. Doctl credentials will need to be setup once in the devcontainer.
 
 ## Getting Started
 
 1. Copy the `.devcontainer` directory to the root of your project.
 2. Open the project in VS Code and select "Reopen in Container" from the
    Command Palette (Ctrl+Shift+P).
-3. Run `npm login` to authenticate with npm if needed.
-4. Run `aws login
 
 Make sure to rebuild the dev container occasionally to pull in any updates.
 
