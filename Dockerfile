@@ -30,5 +30,4 @@ RUN sudo mkdir -p /workspaces/.config
 RUN sudo ln -s "$HOME/.config/mise/config.toml" /workspaces/.config/mise.toml
 
 # Install user tools
-RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN
-RUN mise install -q -y
+RUN --mount=type=secret,id=github_token,env=GITHUB_TOKEN mise install -q -y
