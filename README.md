@@ -26,8 +26,8 @@ Symlinks are created in the container home directory that point to files in the 
 - AWS: `.aws`
 - NPM: `.npmrc`
 - Doctl: `.config/doctl/config.yaml`
-  - NOTE: This is not linked to the remote Doctl config, because its not safe
-    to share. It's linked to a separate file purely for persistence across
+  - NOTE: This is _not_ linked to the remote Doctl config, because it's not safe
+    to share. It's linked to a _separate_ file purely for persistence across
     rebuilds. Doctl credentials will need to be setup once in the devcontainer.
 
 ## Getting Started

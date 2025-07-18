@@ -10,6 +10,7 @@ on:
       - main
     paths-ignore:
       - ".devcontainer/**"
+      - "README.md"
   schedule:
     - cron: "0 0 * * 0"
 
