@@ -10,19 +10,13 @@ Docker image for Dev Containers with pre-configured development tools.
 
 Make sure to rebuild the dev container occasionally to pull in any updates.
 
-If you don't want the VSCode customizations and settings, then this is the minimal recommended `devcontainer.json` content.
+If you don't want to copy the whole devcontainer config, then the following is the minimum required config.
 
 ```json
 {
   "dockerFile": "ghcr.io/seahax/devcontainer:latest",
-  "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": { }
-  },
-	"mounts": [
-		"source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"
-	],
-  "onCreateCommand": "zsh .devcontainer/on-create.zsh",
+  "mounts": ["source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"],
+  "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
 }
 ```
 
