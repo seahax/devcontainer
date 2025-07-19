@@ -46,7 +46,10 @@
       ],
       // Shared VSCode settings.
       "settings": {
-        "remote.autoForwardPortsFallback": 100,
+        "remote.autoForwardPorts": true,
+        "remote.autoForwardPortsSource": "process",
+        "remote.autoForwardPortsFallback": 0,
+        "remote.restoreForwardedPorts": false,
         "editor.codeActionsOnSave": [
           "source.sortPackageJson"
         ],
