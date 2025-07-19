@@ -10,18 +10,18 @@ mise install -y
 [ -f pnpm-lock.yaml ] && pnpm install --frozen-lockfile
 
 # Create container symlinks to remote configs.
-link_config () {
-  local remote_config="$HOME/.remote/${1%/}"
-  local local_config="$HOME/${${2%/}:-${1%/}}"
+typeset -A configs=(
+  [.ssh/id_rsa]=.ssh/id_rsa
+  [.ssh/id_ed25519]=.ssh/id_ed25519
+  [.aws]=.aws
+  [.npmrc]=.npmrc
+  [.config/doctl/seahax-devcontainer-config.yaml]=.config/doctl/config.yaml
+)
+for remote_config local_config in ${(kv)configs}; do
   if [ -e "$local_config" ]; then return; fi
-  echo "Linking \"${remote_config}\" to \"${local_config}\""
-  mkdir -p "$(dirname "${local_config}")"
-  ln -s "${remote_config}" "${local_config}"
-}
-link_config .ssh/id_rsa
-link_config .ssh/id_ed25519
-link_config .aws/
-link_config .npmrc
-link_config .config/doctl/seahax-devcontainer-config.yaml .config/doctl/config.yaml
+  echo "Linking \"${HOME}/${remote_config}\" to \"${HOME}/${local_config}\""
+  mkdir -p "$(dirname "${HOME}/${local_config}")"
+  ln -s "${HOME}/.remote/${remote_config}" "${HOME}/${local_config}"
+done
 
 true

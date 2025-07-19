@@ -11,7 +11,7 @@
     // credentials and configuration files stored in the home directory.
     "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"
   ],
-  "onCreateCommand": "zsh .devcontainer/on-create.zsh",
+  "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
   "customizations": {
     "vscode": {
       // Shared VSCode extensions.
