@@ -18,10 +18,12 @@ typeset -A configs=(
   [.config/doctl/seahax-devcontainer-config.yaml]=.config/doctl/config.yaml
 )
 for remote_config local_config in ${(kv)configs}; do
-  if [ -e "$local_config" ]; then return; fi
-  echo "Linking \"${HOME}/${remote_config}\" to \"${HOME}/${local_config}\""
-  mkdir -p "$(dirname "${HOME}/${local_config}")"
-  ln -s "${HOME}/.remote/${remote_config}" "${HOME}/${local_config}"
+  remote_config="${HOME}/.remote/${remote_config}"
+  local_config="${HOME}/${local_config}"
+  if [ -e "${local_config}" ]; then return; fi
+  echo "Linking \"${remote_config}\" to \"${local_config}\""
+  mkdir -p "$(dirname "${local_config}")"
+  ln -s "/${remote_config}" "${local_config}"
 done
 
 true
