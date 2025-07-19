@@ -30,8 +30,3 @@ WORKDIR /home/vscode
 COPY --chown=vscode:vscode dotfiles/ ./
 RUN sudo chsh -s /usr/bin/zsh vscode
 RUN sudo mkdir -p /workspaces/.config
-RUN sudo ln -s "$HOME/.config/mise/config.toml" /workspaces/.config/mise.toml
-
-# Install user tools
-RUN --mount=type=secret,id=github_token \
-  GITHUB_TOKEN="$(cat /run/secrets/github_token || true)" mise install -q -y

@@ -1,9 +1,0 @@
-[tools]
-awscli = "latest"
-doctl = "latest"
-node = "lts"
-pnpm = "latest"
-python = "latest"
-go = "latest"
-java = "lts"
-rust = "latest"
