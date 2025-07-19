@@ -10,6 +10,7 @@ on:
       - main
     paths-ignore:
       - ".devcontainer/**"
+      - ".devcontainer.json"
       - "README.md"
       - "mise.toml"
   schedule:
