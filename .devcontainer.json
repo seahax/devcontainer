@@ -1,6 +1,6 @@
 {
   "image": "ghcr.io/seahax/devcontainer:latest",
-  // Update the image to the latest version before rebuild.
+  // Pull an updated image before (re-)building the dev container.
   "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest",
   "features": {
     // Allow the dev container to access the host's Docker daemon.
@@ -11,6 +11,7 @@
     // credentials and configuration files stored in the home directory.
     "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"
   ],
+  // Required for Mise auto-install and config file linking (image features).
   "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
   "customizations": {
     "vscode": {

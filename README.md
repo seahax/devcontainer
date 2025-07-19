@@ -4,13 +4,13 @@ Docker image for Dev Containers with pre-configured development tools.
 
 ## Getting Started
 
-1. Copy the `.devcontainer` directory to the root of your project.
+1. Copy the `devcontainer.json` file to the root of your project.
 2. Open the project in VS Code and select "Reopen in Container" from the
    Command Palette (Ctrl+Shift+P).
 
 Make sure to rebuild the dev container occasionally to pull in any updates.
 
-If you don't want to copy the whole devcontainer config, then the following is the minimum required config.
+If you don't want to copy the whole `devcontainer.json` config, then the following is the minimum required config.
 
 ```json
 {
@@ -39,8 +39,9 @@ Symlinks are automatically created in the container home directory that point to
 - AWS: `.aws`
 - NPM: `.npmrc`
 - Doctl: `.config/doctl/config.yaml`
-  - NOTE: This is _not_ linked to the remote Doctl config, because it's not safe
-    to share. It's linked to a _separate_ file purely for persistence across
-    rebuilds. Doctl credentials will need to be setup once in the devcontainer.
+  - NOTE: This is _not_ linked to the remote Doctl config, because it's not
+    safe to share. It's linked to a _separate_ file purely for persistence
+    across rebuilds. Doctl credentials will need to be setup once in the dev
+    container.
 
 A custom `onCreateCommand` can be used to symlink additional configs from `/home/vscode/.remote` into the container home directory if required.
