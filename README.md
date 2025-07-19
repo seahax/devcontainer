@@ -15,8 +15,8 @@ If you don't want to copy the whole `devcontainer.json` config, then the followi
 ```json
 {
   "dockerFile": "ghcr.io/seahax/devcontainer:latest",
-  "mounts": ["source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"],
   "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
+  "mounts": ["source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"],
 }
 ```
 
