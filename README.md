@@ -2,34 +2,6 @@
 
 Docker image for Dev Containers with pre-configured development tools.
 
-## Tools
-
-Tools are provided by [Mise](https://mise.com), and the following tools are pre-installed in the container:
-
-- AWS CLI
-- Digital Ocean CLI (Doctl)
-- Node.js
-- PNPM
-- Python
-- Go
-- Java
-- Rust
-
-## Shared Configs
-
-Symlinks are created in the container home directory that point to files in the remote home directory.
-
-> Requires the [.devcontainer/on-create.zsh](.devcontainer/on-create.zsh) script.
-
-- SSH (RSA): `.ssh/id_rsa`
-- SSH (EdDSA): `.ssh/id_ed25519`
-- AWS: `.aws`
-- NPM: `.npmrc`
-- Doctl: `.config/doctl/config.yaml`
-  - NOTE: This is _not_ linked to the remote Doctl config, because it's not safe
-    to share. It's linked to a _separate_ file purely for persistence across
-    rebuilds. Doctl credentials will need to be setup once in the devcontainer.
-
 ## Getting Started
 
 1. Copy the `.devcontainer` directory to the root of your project.
@@ -53,3 +25,28 @@ If you don't want the VSCode customizations and settings, then this is the minim
   "onCreateCommand": "zsh .devcontainer/on-create.zsh",
 }
 ```
+
+## Tools
+
+> Depends on running the`$HOME/.devcontainer-on-create.zsh` container script using the Dev Container [onCreateCommand](https://containers.dev/implementors/json_reference/#lifecycle-scripts).
+
+[Mise](https://mise.com) is installed as the preferred tool manager.
+
+Add a [`mise.toml`](https://mise.jdx.dev/configuration.html) to the root of your repo. Tools will be installed automatically when the dev container is (re-)built.
+
+## Shared Configs
+
+> Depends on running the`$HOME/.devcontainer-on-create.zsh` container script using the Dev Container [onCreateCommand](https://containers.dev/implementors/json_reference/#lifecycle-scripts).
+
+Symlinks are automatically created in the container home directory that point to files in the remote home directory (mounted at `/home/vscode/.remote`).
+
+- SSH (RSA): `.ssh/id_rsa`
+- SSH (EdDSA): `.ssh/id_ed25519`
+- AWS: `.aws`
+- NPM: `.npmrc`
+- Doctl: `.config/doctl/config.yaml`
+  - NOTE: This is _not_ linked to the remote Doctl config, because it's not safe
+    to share. It's linked to a _separate_ file purely for persistence across
+    rebuilds. Doctl credentials will need to be setup once in the devcontainer.
+
+A custom `onCreateCommand` can be used to symlink additional configs from `/home/vscode/.remote` into the container home directory if required.
