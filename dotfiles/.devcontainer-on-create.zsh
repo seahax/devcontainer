@@ -2,7 +2,7 @@
 
 # Install Mise tools if the repo has a local Mise config.
 mise trust -a
-mise install -q -y
+mise install -y
 
 # Restore JS package manager dependencies.
 [ -f package-lock.json ] && npm ci
