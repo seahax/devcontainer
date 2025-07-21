@@ -15,8 +15,12 @@ RUN <<EOF
     tee /etc/apt/sources.list.d/mise.list
   sed -i '/path-exclude/s/^/#/' /etc/dpkg/dpkg.cfg.d/excludes
   apt-get update -y
+  apt-get upgrade -y
   apt-get install -y git vim mise
   apt-get --reinstall install man-db manpages manpages-dev manpages-posix manpages-posix-dev -y
+  apt-get clean -y
+  apt-get autoclean -y
+  apt-get autoremove -y
   mv /usr/bin/man.REAL /usr/bin/man
   mandb -c
 EOF
