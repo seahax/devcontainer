@@ -29,12 +29,12 @@ done
 echo -e '\e[0;93m
 Dev container setup is complete!
 
-You can manually sync any local VSCode extensions that are missing from the
-dev container by following these steps:
+You can manually install any of your local VSCode extensions that are not
+included in the dev container by following these steps:
 
-  1. Open the VSCode command palette.
-  2. Paste the "workbench.extensions.installLocalExtensions" command ID and
-     press enter.
+  1. Open the VSCode command palette (Cmd+Shift+P on mac).
+  2. Paste the "workbench.extensions.installLocalExtensions" command ID
+     and press enter.
   3. Select the local extensions you want to install in the dev container
      and click "OK".
 \e[0m'
