@@ -42,8 +42,7 @@
         "unional.vscode-sort-package-json",
         "vitest.explorer",
         "yzhang.markdown-all-in-one",
-        "ziyasal.vscode-open-in-github",
-        "zxh404.vscode-proto3"
+        "ziyasal.vscode-open-in-github"
       ],
       "settings": {
         // Please don't add extension configurations here. Configuration for
