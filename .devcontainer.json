@@ -17,21 +17,12 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        // Please be considerate of your fellow devcontainer users. If an
-        // extension significantly alters the behavior of VSCode, discuss it
-        // with the team before adding it here.
-        //
-        // You can always manually sync your own local extensions to the dev
-        // container after each (re-)build if you want to use extensions that
-        // are not listed here. 
-        //
-        // Manual Sync
-        // -----------
-        // 1. Open the VSCode command palette.
-        // 2. Paste the "workbench.extensions.installLocalExtensions" command
-        //    ID and press enter.
-        // 3. Select the local extensions you want to install in the dev
-        //    container and click "OK".
+        // Please be considerate of your fellow devcontainer users when adding
+        // extensions. If an extension significantly alters the behavior of
+        // VSCode, discuss it with the team before adding it. You can always
+        // manually sync your own local extensions to the dev container after
+        // each (re-)build if you want to use extensions that are not
+        // automatically installed.
         "bierner.markdown-preview-github-styles",
         "byi8220.indented-block-highlighting",
         "chrisbibby.hide-git-ignored",
