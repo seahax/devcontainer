@@ -2,11 +2,12 @@
   "image": "ghcr.io/seahax/devcontainer:latest",
   // Pull an updated image before (re-)building the dev container.
   "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest",
-  // Required for Mise auto-install and config file linking (image features).
+  // Run the on-create script included in the image.
   "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
   "mounts": [
     // Mount the host's home directory to the container. Required for config
-    // file linking (image feature).
+    // file linking, which is setup by the "$HOME/.devcontainer-on-create.zsh"
+    // script that should be used as the dev container "onCreateCommand"..
     "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"
   ],
   "features": {
@@ -15,59 +16,58 @@
   },
   "customizations": {
     "vscode": {
-      // Shared VSCode extensions.
       "extensions": [
+        // Please be considerate of your fellow devcontainer users. If an
+        // extension significantly alters the behavior of VSCode, discuss it
+        // with the team before adding it here.
+        //
+        // You can always manually sync your own local extensions to the dev
+        // container after each (re-)build if you want to use extensions that
+        // are not listed here. 
+        //
+        // Manual Sync
+        // -----------
+        // 1. Open the VSCode command palette.
+        // 2. Paste the "workbench.extensions.installLocalExtensions" command
+        //    ID and press enter.
+        // 3. Select the local extensions you want to install in the dev
+        //    container and click "OK".
         "bierner.markdown-preview-github-styles",
         "byi8220.indented-block-highlighting",
         "chrisbibby.hide-git-ignored",
-        "codezombiech.gitignore",
         "dbaeumer.vscode-eslint",
         "donjayamanne.githistory",
         "ecmel.vscode-html-css",
         "github.copilot-chat",
         "github.copilot",
-        "golang.go",
+        "Gruntfuggly.todo-tree",
+        "maattdd.gitless",
         "nhoizey.gremlins",
         "pflannery.vscode-versionlens",
-        "pkief.material-icon-theme",
-        "premparihar.gotestexplorer",
         "redhat.vscode-yaml",
-        "stkb.rewrap",
         "streetsidesoftware.code-spell-checker-scientific-terms",
         "streetsidesoftware.code-spell-checker",
+        "tamasfe.even-better-toml",
         "unional.vscode-sort-package-json",
+        "vitest.explorer",
         "yzhang.markdown-all-in-one",
         "ziyasal.vscode-open-in-github",
-        "zxh404.vscode-proto3",
-        "maattdd.gitless",
-        "Gruntfuggly.todo-tree",
-        "vitest.explorer",
-        "ms-python.python",
-        "tamasfe.even-better-toml"
+        "zxh404.vscode-proto3"
       ],
-      // Shared VSCode settings.
       "settings": {
+        // Please don't add extension configurations here. Configuration for
+        // extensions should be left up to the individual devcontainer user.
         "remote.autoForwardPorts": true,
         "remote.autoForwardPortsSource": "process",
         "remote.autoForwardPortsFallback": 0,
         "remote.restoreForwardedPorts": false,
-        "editor.codeActionsOnSave": [
-          "source.sortPackageJson"
-        ],
         "editor.tabSize": 2,
-        "explorer.excludeGitIgnore": true,
         "files.eol": "\n",
-        "markdown.extension.toc.levels": "2..4",
         "terminal.integrated.defaultProfile.linux": "zsh",
-        "typescript.preferences.importModuleSpecifierEnding": "js",
-        "typescript.preferences.quoteStyle": "single",
-        "typescript.suggest.completeJSDocs": false,
-        "typescript.suggest.jsdoc.generateReturns": false,
-        "typescript.tsdk": "node_modules/typescript/lib",
-        "window.confirmBeforeClose": "always",
         "workbench.view.showQuietly": {
           "workbench.panel.output": true
-        }
+        },
+        "typescript.tsdk": "node_modules/typescript/lib"
       }
     }
   }
