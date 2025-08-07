@@ -15,8 +15,10 @@ zstyle ':omz:update' mode disabled
 zstyle ":completion:*:commands" rehash 1
 source $ZSH/oh-my-zsh.sh
 
-for file in "$HOME/.zshrc.d/*.zsh"(N); do
-  source "$file"
-done
+eval "$(mise activate zsh)"
+
+if [ -f "$HOME/.host/.devcontainer/zshrc" ]; then
+  source "$HOME/.host/.devcontainer/zshrc"
+fi
 
 true

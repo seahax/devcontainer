@@ -5,22 +5,13 @@
 
 export LANG=en_US.UTF-8
 export EDITOR=vim
-export AWS_REGION=us-east-1
-export PNPM_HOME="$HOME/.pnpm"
+export NPM_CONFIG_UPDATE_NOTIFIER=false
 
-path=(
-  $PNPM_HOME
-  $HOME/.local/bin
-  $HOME/.local/share/mise/shims
-  $path
-)
+path=($HOME/.local/share/mise/shims $path)
 
-mkdir -p "$HOME/.local/bin"
-mkdir -p "$PNPM_HOME"
-
-for file in "$HOME/.zprofile.d/*.zsh"(N); do
-  source "$file"
-done
+if [ -f "$HOME/.host/.devcontainer/zprofile" ]; then
+  source "$HOME/.host/.devcontainer/zprofile"
+fi
 
 source "$HOME/.zshrc"
 

@@ -2,46 +2,54 @@
 
 Docker image for Dev Containers with pre-configured development tools.
 
-## Getting Started
+- [Installation](#installation)
+- [Tool Management](#tool-management)
+- [Symlinked Configuration](#symlinked-configuration)
+- [ZSH Startup Configuration](#zsh-startup-configuration)
+- [Port Forwarding](#port-forwarding)
 
-1. Copy the `devcontainer.json` file to the root of your project.
-2. Open the project in VS Code and select "Reopen in Container" from the
-   Command Palette (Ctrl+Shift+P).
+
+## Installation
+
+1. Copy the [.devcontainer.json](.devcontainer.json) file from this repo, into the root of your project repo. This should be the only _required_ configuration.
+2. (Optional) Add a [mise.toml](#tools-mise) to the repo root with tool version configurations for your project.
+3. (Optional) Copy the [PREREQUISITES_MACOS.md](PREREQUISITES_MACOS.md) file into the project repo.
+4. Complete the [prerequisites](PREREQUISITES_MACOS.md) to make sure your system (host) is ready to run dev containers.
+5. Open the repo root directory in VSCode (if you haven't already).
+6. Open the command palette (Command+Shift+P) and select "Reopen in Container".
 
 Make sure to rebuild the dev container occasionally to pull in any updates.
 
-If you don't want to copy the whole `devcontainer.json` config, then the following is the minimum required config.
+## Tool Management
 
-```json
-{
-  "dockerFile": "ghcr.io/seahax/devcontainer:latest",
-  "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
-  "mounts": ["source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"],
-}
+[Mise](https://mise.com) provides specific tool versions per directory. Add a `mise.toml` file to the root of your repo. Configured tools will be installed automatically when the dev container is built.
+
+```toml
+[settings]
+experimental = true
+
+[tools]
+node = "lts"
+
+[hooks]
+postinstall = "npm i -g npm@latest"
 ```
 
-## Tools
+## Symlinked Configuration
 
-> Depends on running the`$HOME/.devcontainer-on-create.zsh` container script using the Dev Container [onCreateCommand](https://containers.dev/implementors/json_reference/#lifecycle-scripts).
+Symlinks are automatically created in the dev container home directory referencing a limited set of configuration files in the host's home directory. 
 
-[Mise](https://mise.com) is installed as the preferred tool manager.
+- Dev container `$HOME/.aws` is a link to host `$HOME/.aws`.
+- Dev container `$HOME/.npmrc` is a link to host `$HOME/.npmrc`.
+- Dev container `$HOME/.config/doctl/config.yaml` is a link to host `$HOME/.config/doctl/seahax-devcontainer-config.yaml`.
 
-Add a [`mise.toml`](https://mise.jdx.dev/configuration.html) to the root of your repo. Tools will be installed automatically when the dev container is (re-)built.
+## ZSH Startup Configuration
 
-## Shared Configs
+You can also extend the ZSH configuration for this dev container.
 
-> Depends on running the`$HOME/.devcontainer-on-create.zsh` container script using the Dev Container [onCreateCommand](https://containers.dev/implementors/json_reference/#lifecycle-scripts).
+- Dev container `$HOME/.zprofile` sources host `$HOME/.devcontainer/zprofile`.
+- Dev container `$HOME/.zshrc` sources host `$HOME/.devcontainer/zshrc`.
 
-Symlinks are automatically created in the container home directory that point to files in the remote home directory (mounted at `/home/vscode/.remote`).
+## Port Forwarding
 
-- SSH (RSA): `.ssh/id_rsa`
-- SSH (EdDSA): `.ssh/id_ed25519`
-- AWS: `.aws`
-- NPM: `.npmrc`
-- Doctl: `.config/doctl/config.yaml`
-  - NOTE: This is _not_ linked to the remote Doctl config, because it's not
-    safe to share. It's linked to a _separate_ file purely for persistence
-    across rebuilds. Doctl credentials will need to be setup once in the dev
-    container.
-
-A custom `onCreateCommand` can be used to symlink additional configs from `/home/vscode/.remote` into the container home directory if required.
+The dev container is configured to automatically forward ports when processes in the container start listening for connections.

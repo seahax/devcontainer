@@ -1,28 +1,23 @@
 {
   "image": "ghcr.io/seahax/devcontainer:latest",
   // Pull an updated image before (re-)building the dev container.
-  "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest",
-  // Run the on-create script included in the image.
-  "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
+  "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest || true",
+  // REQUIRED for symlinked configuration files and automatic tool installation
+  // (mise). Run the on-create script included in the image.
+  "onCreateCommand": "$HOME/.devcontainer/on-create.zsh",
   "mounts": [
-    // Mount the host's home directory to the container. Required for config
-    // file linking, which is setup by the "$HOME/.devcontainer-on-create.zsh"
-    // script that should be used as the dev container "onCreateCommand"..
-    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.remote,type=bind"
+    // REQUIRED for symlinked configuration files. Mounts the host's home
+    // directory in the dev container.
+    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.home,type=bind"
   ],
   "features": {
-    // Allow the dev container to access the host's Docker daemon.
+    // REQUIRED to run docker commands inside the dev container. Allows the dev
+    // container to access the host's Docker daemon.
     "ghcr.io/devcontainers/features/docker-in-docker:2": { }
   },
   "customizations": {
     "vscode": {
       "extensions": [
-        // Please be considerate of your fellow devcontainer users when adding
-        // extensions. If an extension significantly alters the behavior of
-        // VSCode, discuss it with the team before adding it. You can always
-        // manually sync your own local extensions to the dev container after
-        // each (re-)build if you want to use extensions that are not
-        // automatically installed.
         "bierner.markdown-preview-github-styles",
         "byi8220.indented-block-highlighting",
         "chrisbibby.hide-git-ignored",
@@ -42,11 +37,10 @@
         "unional.vscode-sort-package-json",
         "vitest.explorer",
         "yzhang.markdown-all-in-one",
-        "ziyasal.vscode-open-in-github"
+        "ms-azuretools.vscode-containers",
+        "qezhu.gitlink"
       ],
       "settings": {
-        // Please don't add extension configurations here. Configuration for
-        // extensions should be left up to the individual devcontainer user.
         "remote.autoForwardPorts": true,
         "remote.autoForwardPortsSource": "process",
         "remote.autoForwardPortsFallback": 0,
