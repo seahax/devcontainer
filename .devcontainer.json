@@ -3,7 +3,7 @@
   // Pull an updated image before (re-)building the dev container.
   "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest || true",
   // REQUIRED for symlinked configuration files and automatic tool installation
-  // (mise). Run the on-create script included in the image.
+  // (mise). Runs the on-create script included in the image.
   "onCreateCommand": "$HOME/.devcontainer/on-create.zsh",
   "mounts": [
     // REQUIRED for symlinked configuration files. Mounts the host's home
