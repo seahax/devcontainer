@@ -2,20 +2,25 @@
   "image": "ghcr.io/seahax/devcontainer:latest",
   // Pull an updated image before (re-)building the dev container.
   "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest || true",
-  // REQUIRED for symlinked configuration files and automatic tool installation
-  // (mise). Runs the on-create script included in the image.
-  "onCreateCommand": "$HOME/.devcontainer/on-create.zsh",
+  // Run the built-in on-create script.
+  "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
   "mounts": [
-    // REQUIRED for symlinked configuration files. Mounts the host's home
-    // directory in the dev container.
-    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/home/vscode/.home,type=bind"
+    // Mount the host's home directory in the dev container.
+    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/mnt/home,type=bind"
   ],
   "features": {
-    // REQUIRED to run docker commands inside the dev container. Allows the dev
-    // container to access the host's Docker daemon.
+    // Support using docker inside the dev container.
     "ghcr.io/devcontainers/features/docker-in-docker:2": { }
   },
   "customizations": {
+    "$onCreateCommands": [
+      // Share the host's NPM config.
+      "ln -s /mnt/home/.npmrc",
+      // Run mise install early so that NPM is available.
+      "cd $WORKSPACE && mise install -y",
+      // Restore JS dependencies.
+      "cd $WORKSPACE && npm install"
+    ],
     "vscode": {
       "extensions": [
         "bierner.markdown-preview-github-styles",

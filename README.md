@@ -3,8 +3,8 @@
 Docker image for VSCode dev containers.
 
 - [Installation](#installation)
+  - [On Create Hook](#on-create-hook)
 - [Tool Management](#tool-management)
-- [Symlinked Configuration](#symlinked-configuration)
 - [ZSH Startup Configuration](#zsh-startup-configuration)
 - [Port Forwarding](#port-forwarding)
 
@@ -20,9 +20,45 @@ Docker image for VSCode dev containers.
 
 Rebuild the dev container occasionally to pull in any updates.
 
+### On Create Hook
+
+The recommended [.devcontainer.json](.devcontainer.json) file includes an `onCreateCommand` hook that runs the `~/.devcontainer-on-create.zsh` script which is built-in to the image. That script does two things:
+
+1. It runs all commands in the dev container config `customizations.$onCommandConfigs` array.
+2. It automatically installs your required tools (see the [Tool Management](#tool-management) section).
+
+The `customizations.$onCommandConfigs` array is different from using an `onCreateCommand` object in the following ways:
+
+- Commands are run sequentially (instead of in parallel).
+- Commands are run in the dev container home directory (`/home/vscode`).
+- The `WORKSPACE` environment variable contains the path of the opened directory (ie. the cloned repo root).
+
+Example: Sharing NPM credentials (and config) with the host.
+
+```json
+{
+  // Run the built-in on-create script.
+  "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
+  "mounts": [
+    // Mount the host's home directory in the dev container.
+    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/mnt/home,type=bind"
+  ],
+  "customizations": {
+    "$onCreateCommands": [
+      // Share the host's NPM credentials (and config).
+      "ln -s /mnt/home/.npmrc",
+      // Run mise install early so that NPM is available.
+      "cd $WORKSPACE && mise install -y",
+      // Restore JS dependencies with credentials.
+      "cd $WORKSPACE && npm install"
+    ]
+  }
+}
+```
+
 ## Tool Management
 
-[Mise](https://mise.com) provides specific tool versions per directory. Add a `mise.toml` file to the root of your repo. Configured tools will be installed automatically when the dev container is built.
+[Mise](https://mise.com) is installed in the dev container image. Add a `mise.toml` file to the root of your repo to have tools installed automatically after the dev container is built (See the [On Create Hook](#on-create-hook) section)
 
 ```toml
 [tools]
@@ -31,18 +67,9 @@ npm = "latest"
 node = "lts"
 ```
 
-## Symlinked Configuration
-
-Symlinks are automatically created in the dev container home directory referencing a limited set of configuration files in the host's home directory. 
-
-- The `.aws` directory.
-- The `.npmrc` file.
-- The `.config/doctl/config.yaml` file.
-  - Linked to `.config/doctl/seahax-devcontainer-config.yaml` on the host, because sharing doesn't work correctly. But, it's still useful to persist it outside the dev container so configuration only has to be done once and not after every rebuild.
-
 ## ZSH Startup Configuration
 
-You can also extend the ZSH configuration for this dev container.
+You can extend the ZSH configuration for this dev container.
 
 - The dev container `.zprofile` sources the host `.devcontainer/zprofile` file.
 - The dev container `.zshrc` sources the host `.devcontainer/zshrc` file.

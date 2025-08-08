@@ -9,10 +9,8 @@ export NPM_CONFIG_UPDATE_NOTIFIER=false
 
 path=($HOME/.local/share/mise/shims $path)
 
-if [ -f "$HOME/.host/.devcontainer/zprofile" ]; then
-  source "$HOME/.host/.devcontainer/zprofile"
+if [ -f /mnt/home/.devcontainer/zprofile ]; then
+  source /mnt/home/.devcontainer/zprofile
 fi
 
 source "$HOME/.zshrc"
-
-true

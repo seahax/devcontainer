@@ -17,8 +17,6 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(mise activate zsh)"
 
-if [ -f "$HOME/.host/.devcontainer/zshrc" ]; then
-  source "$HOME/.host/.devcontainer/zshrc"
+if [ -f /mnt/home/.devcontainer/zshrc ]; then
+  source /mnt/home/.devcontainer/zshrc
 fi
-
-true
