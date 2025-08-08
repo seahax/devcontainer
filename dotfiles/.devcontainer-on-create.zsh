@@ -1,8 +1,4 @@
 #!/usr/bin/env zsh
-# Run all of the commands in the "customizations.ON_CREATE_COMMANDS" array of the
-# dev container config file.
-
-export WORKSPACE="$PWD"
 
 mise trust -a
 
@@ -18,7 +14,7 @@ if [ -n "$CONFIG_FILE" ]; then
 
   for ON_CREATE_COMMAND in "${ON_CREATE_COMMANDS[@]}"; do
     echo "> $ON_CREATE_COMMAND"
-    (cd "$HOME" && echo "$ON_CREATE_COMMAND" | "$DEFAULT_SHELL")
+    echo "$ON_CREATE_COMMAND" | "$DEFAULT_SHELL"
   done
 fi
 

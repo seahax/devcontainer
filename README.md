@@ -24,21 +24,15 @@ Rebuild the dev container occasionally to pull in any updates.
 
 The recommended [.devcontainer.json](.devcontainer.json) file includes an `onCreateCommand` hook that runs the `~/.devcontainer-on-create.zsh` script which is built-in to the image. That script does two things:
 
-1. It runs all commands in the dev container config `customizations.$onCommandConfigs` array.
+1. It _sequentially_ runs all commands in the dev container config `customizations.$onCommandConfigs` array.
 2. It automatically installs your required tools (see the [Tool Management](#tool-management) section).
-
-The `customizations.$onCommandConfigs` array is different from using an `onCreateCommand` object in the following ways:
-
-- Commands are run sequentially (instead of in parallel).
-- Commands are run in the dev container home directory (`/home/vscode`).
-- The `WORKSPACE` environment variable contains the path of the opened directory (ie. the cloned repo root).
 
 Example: Sharing NPM credentials (and config) with the host.
 
 ```json
 {
   // Run the built-in on-create script.
-  "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
+  "onCreateCommand": "~/.devcontainer-on-create.zsh",
   "mounts": [
     // Mount the host's home directory in the dev container.
     "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/mnt/home,type=bind"
@@ -46,11 +40,11 @@ Example: Sharing NPM credentials (and config) with the host.
   "customizations": {
     "$onCreateCommands": [
       // Share the host's NPM credentials (and config).
-      "ln -s /mnt/home/.npmrc",
+      "ln -s /mnt/home/.npmrc ~/.npmrc",
       // Run mise install early so that NPM is available.
-      "cd $WORKSPACE && mise install -y",
+      "mise install -y",
       // Restore JS dependencies with credentials.
-      "cd $WORKSPACE && npm install"
+      "npm install"
     ]
   }
 }

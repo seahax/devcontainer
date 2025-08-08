@@ -3,7 +3,7 @@
   // Pull an updated image before (re-)building the dev container.
   "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest || true",
   // Run the built-in on-create script.
-  "onCreateCommand": "$HOME/.devcontainer-on-create.zsh",
+  "onCreateCommand": "~/.devcontainer-on-create.zsh",
   "mounts": [
     // Mount the host's home directory in the dev container.
     "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/mnt/home,type=bind"
@@ -15,11 +15,11 @@
   "customizations": {
     "$onCreateCommands": [
       // Share the host's NPM config.
-      "ln -s /mnt/home/.npmrc",
+      "ln -s /mnt/home/.npmrc ~/.npmrc",
       // Run mise install early so that NPM is available.
-      "cd $WORKSPACE && mise install -y",
+      "mise install -y",
       // Restore JS dependencies.
-      "cd $WORKSPACE && npm install"
+      "npm install"
     ],
     "vscode": {
       "extensions": [
