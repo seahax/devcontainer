@@ -65,14 +65,14 @@ Initialization tasks are similar to adding additional commands to the the dev co
 The ZSH configuration for this dev container can be extended from the host and from the project source (ie. the cloned repository).
 
 - The built-in `~/.zshenv` script sources...
-  - `/mnt/home/.devcontainer/zshenv`
-  - `/workspace/<name>/.devcontainer/zshenv`
+  - `/mnt/home/.devcontainer/zshenv*`
+  - `/workspace/<name>/.devcontainer/zshenv*`
 - The built-in `~/.zprofile` script sources...
-  - `/mnt/home/.devcontainer/zprofile`
-  - `/workspace/<name>/.devcontainer/zprofile`
+  - `/mnt/home/.devcontainer/zprofile*`
+  - `/workspace/<name>/.devcontainer/zprofile*`
 - The built-in `~/.zshrc` script sources...
-  - `/mnt/home/.devcontainer/zshrc`
-  - `/workspace/<name>/.devcontainer/zshrc`
+  - `/mnt/home/.devcontainer/zshrc*`
+  - `/workspace/<name>/.devcontainer/zshrc*`
 
 The [oh-my-zsh](https://ohmyz.sh/) initialization is delayed until after the above ZSH configuration files are sourced, so you can use them (specifically `zshrc`) to change settings and add plugins.
 

@@ -15,13 +15,9 @@ DISABLE_AUTO_TITLE=true
 plugins=(vscode git mise)
 zstyle ':omz:update' mode disabled
 
-if [ -f /mnt/home/.devcontainer/zshrc ]; then
-  source /mnt/home/.devcontainer/zshrc
-fi
-
-if [ -f .devcontainer/zshrc ]; then
-  source .devcontainer/zshrc
-fi
+for file in /mnt/home/.devcontainer/zshrc*(N) .devcontainer/zshrc*(N); do
+  source "$file"
+done
 
 zstyle ":completion:*:commands" rehash 1
 source $ZSH/oh-my-zsh.sh

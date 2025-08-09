@@ -3,10 +3,6 @@
 #   - Things that need to be updated frequently
 #   - Things that are inherited by child shells
 
-if [ -f /mnt/home/.devcontainer/zshenv ]; then
-  source /mnt/home/.devcontainer/zshenv
-fi
-
-if [ -f .devcontainer/zshenv ]; then
-  source .devcontainer/zshenv
-fi
+for file in /mnt/home/.devcontainer/zshenv*(N) .devcontainer/zshenv*(N); do
+  source "$file"
+done

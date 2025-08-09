@@ -10,10 +10,6 @@ export NPM_CONFIG_GLOBALCONFIG=/etc/npmrc
 
 path=($HOME/.local/share/mise/shims $path)
 
-if [ -f /mnt/home/.devcontainer/zprofile ]; then
-  source /mnt/home/.devcontainer/zprofile
-fi
-
-if [ -f .devcontainer/zprofile ]; then
-  source .devcontainer/zprofile
-fi
+for file in /mnt/home/.devcontainer/zprofile*(N) .devcontainer/zprofile*(N); do
+  source "$file"
+done
