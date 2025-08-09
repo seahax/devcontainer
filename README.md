@@ -1,6 +1,6 @@
-# Dev Container Docker Image
+# Seahax Dev Container
 
-Docker image for VSCode dev containers.
+Config and docker image for VSCode dev containers.
 
 - [Installation](#installation)
 - [Bootstrapping](#bootstrapping)

@@ -1,4 +1,4 @@
-# Dev Container: Prerequisites (macOS)
+# Seahax Dev Container: Prerequisites
 
 For dev containers to work correctly, some host configuration changes may be necessary
 
