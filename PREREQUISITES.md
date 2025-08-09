@@ -2,8 +2,24 @@
 
 For dev containers to work correctly, some host configuration changes may be necessary
 
+- [Docker Desktop](#docker-desktop)
+- [Dev Container Extension](#dev-container-extension)
 - [SSH Agent](#ssh-agent)
 - [GPG Agent](#gpg-agent)
+
+## Docker Desktop
+
+The following settings are strongly recommended.
+
+- **Resources (page) > Advanced (tab)**
+  - **CPU limit (slider):** Set to about half the available cores (min 4).
+  - **Memory Limit (slider):** Set to about half the available memory (min 8GB).
+  - **Swap (slider):** Set to maximum (4GB).
+  - **Disk usage limit (slider):** Set to about 1/4 of the available storage (~128 GB).
+
+## Dev Container Extension
+
+Install the VSCode [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
 
 ## SSH Agent
 
