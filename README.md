@@ -62,7 +62,7 @@ Initialization tasks are similar to adding additional commands to the the dev co
 
 ## ZSH Configuration
 
-The ZSH configuration for this dev container can be extended from the host, and from the project source (ie. the cloned repository).
+The ZSH configuration for this dev container can be extended from the host and from the project source (ie. the cloned repository).
 
 - The built-in `~/.zshenv` script sources...
   - `/mnt/home/.devcontainer/zshenv`
