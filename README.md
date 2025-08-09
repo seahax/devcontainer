@@ -56,11 +56,11 @@ The recommended dev container config mounts the host's home directory inside the
 Initialization tasks are similar to adding additional commands to the the dev container `onCreateCommand` hook, but with the following differences:
 
 - Tools and basic configs are setup first.
+- Init tasks are run inside a (non-interactive) login shell.
 - Init tasks are run serially (when run automatically on container creation).
-- Tasks can also be executed manually.
+- Init tasks can also be executed manually.
 - Task ordering is configurable (alphabetical by default).
 
-The init tasks are run inside a (non-interactive) login shell.
 
 ## ZSH Configuration
 

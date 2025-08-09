@@ -12,8 +12,8 @@ ln -s -t ~/.cache /mnt/home/.cache/mise
 zsh -l -c '
 mise trust --yes --all
 mise use --yes --global usage
-mise install --yes
-mise run --continue-on-error --no-cache "init:**"
+mise install --yes --jobs=1
+mise run --jobs=1 --continue-on-error --no-cache "init:**"
 '
 
 # This script should always succeed, even if the last command exits with a
