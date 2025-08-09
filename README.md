@@ -74,6 +74,8 @@ The ZSH configuration for this dev container can be extended from the host and f
   - `/mnt/home/.devcontainer/zshrc`
   - `/workspace/<name>/.devcontainer/zshrc`
 
+The [oh-my-zsh](https://ohmyz.sh/) initialization is delayed until after the above ZSH configuration files are sourced, so you can use them (specifically `zshrc`) to change settings and add plugins.
+
 ## Port Forwarding
 
 The dev container VSCode settings are set to automatically forward ports when processes in the container start listening for connections.
