@@ -60,6 +60,8 @@ Initialization tasks are similar to adding additional commands to the the dev co
 - Tasks can also be executed manually.
 - Task ordering is configurable (alphabetical by default).
 
+The init tasks are run inside a (non-interactive) login shell.
+
 ## ZSH Configuration
 
 The ZSH configuration for this dev container can be extended from the host and from the project source (ie. the cloned repository).

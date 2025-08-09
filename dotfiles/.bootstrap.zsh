@@ -8,11 +8,9 @@ mkdir -p /mnt/home/.cache/mise
 rm -rf $HOME/.cache/mise
 ln -s -t ~/.cache /mnt/home/.cache/mise
 
-# Trust the mise configs in the dev container.
+# Install tools and run init tasks inside a (non-interactive) login shell.
+zsh -l -c '
 mise trust --yes --all
-
-# Install tools and run init tasks inside an interactive login shell.
-zsh -l -i -c '
 mise use --yes --global usage
 mise install --yes
 mise run --continue-on-error --no-cache "init:**"
