@@ -29,7 +29,7 @@ This is used for SSH with public key auth, including Git (over SSH). You must ha
    - Restart the computer if you change this option.
 2. Ensure your SSH identities are added to (loaded in) the SSH agent before using SSH in the dev container. Run `ssh-add` (or `ssh-add --apple-use-keychain` on macOS).
    - You will need to do this once each time you log back into your computer.
-   - On macOS, you can use `ssh-add --apple-load-keychain` to reload the identities from the Apple keychain without needing to enter the passphrase again. Running it in your `.zprofile` is enough to load them automatically before VSCode starts.
+   - **macOS:** Use `ssh-add --apple-load-keychain` to reload the identities from the Apple keychain without needing to enter the passphrase again. Running it in your `.zprofile` is enough to load them automatically before VSCode starts.
 
 If you added your public key to Github for SSH auth, then you can test your credentials by running `ssh -T git@github.com`. If it works on the host, but not in the dev container, then SSH agent forwarding is not working correctly. The `ssh-add -L` command should also list the same identities when run on the host and in the dev container.
 
@@ -39,4 +39,4 @@ Only necessary if the host has GnuPG (gpg) installed. You can check by running t
 
 Run `gpg -k` before using GPG in the dev container. This will create the `keyboxd` socket in your `~/.gnupg` directory, which will prevent errors when using gpg to verify signatures (eg. during Mise install).
    - You will need to do this once each time you log back into your computer.
-   - On macOS, running it in your `.zprofile` is enough to create the socket automatically before VSCode starts.
+   - **macOS:** Running it in your `.zprofile` is enough to create the socket automatically before VSCode starts.
