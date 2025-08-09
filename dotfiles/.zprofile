@@ -5,7 +5,7 @@
 
 export LANG=en_US.UTF-8
 export EDITOR=vim
-export NPM_CONFIG_UPDATE_NOTIFIER=false
+export NPM_CONFIG_GLOBALCONFIG=/etc/npmrc
 
 path=($HOME/.local/share/mise/shims $path)
 
