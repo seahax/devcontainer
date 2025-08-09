@@ -48,6 +48,8 @@
           // Dev containers don't have a "login", so (like mac) every new
           // terminal should essentially be a login terminal.
           "zsh": { "path": "zsh", "args": [ "--login", "--interactive" ] },
+          // If you want to run bash, start a bash shell inside a zsh so that
+          // it inherits the zsh environment.
           "bash": null
         },
         "terminal.integrated.defaultProfile.linux": "zsh",
