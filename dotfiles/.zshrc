@@ -1,4 +1,4 @@
-# When: On new interactive shells (non-login, unless sourced by .zprofile)
+# When: On new interactive shells
 # For:
 #   - Aliases
 #   - Functions
@@ -19,4 +19,8 @@ eval "$(mise activate zsh)"
 
 if [ -f /mnt/home/.devcontainer/zshrc ]; then
   source /mnt/home/.devcontainer/zshrc
+fi
+
+if [ -f .devcontainer/zshrc ]; then
+  source .devcontainer/zshrc
 fi

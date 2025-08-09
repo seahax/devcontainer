@@ -2,6 +2,7 @@
 # For:
 #   - Global environment variables (eg. PATH, EDITOR, etc.)
 #   - Things that are inherited by child shells
+#   - Things that are only applicable after logging in
 
 export LANG=en_US.UTF-8
 export EDITOR=vim
@@ -13,4 +14,6 @@ if [ -f /mnt/home/.devcontainer/zprofile ]; then
   source /mnt/home/.devcontainer/zprofile
 fi
 
-source "$HOME/.zshrc"
+if [ -f .devcontainer/zprofile ]; then
+  source .devcontainer/zprofile
+fi

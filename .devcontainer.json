@@ -44,6 +44,12 @@
         "remote.restoreForwardedPorts": false,
         "editor.tabSize": 2,
         "files.eol": "\n",
+        "terminal.integrated.profiles.linux": {
+          // Dev containers don't have a "login", so (like mac) every new
+          // terminal should essentially be a login terminal.
+          "zsh": { "path": "zsh", "args": [ "--login", "--interactive" ] },
+          "bash": null
+        },
         "terminal.integrated.defaultProfile.linux": "zsh",
         "workbench.view.showQuietly": {
           "workbench.panel.output": true
