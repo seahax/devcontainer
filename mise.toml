@@ -1,7 +1,16 @@
 [tools]
 npm = "latest"
 node = "lts"
+doctl = "latest"
+aws = "latest"
+
+[env]
+AWS_PROFILE = "seahax"
+AWS_REGION = "us-east-1"
 
 [tasks]
 build = "docker build --progress=plain -t seahax/devcontainer ."
 buildx = "docker buildx build --progress=plain --platform linux/arm64,linux/amd64 -t seahax/devcontainer ."
+"init:npm" = ["ln -s -t ~ /mnt/home/.npmrc", "npm install"]
+"init:aws" = ["ln -s -t ~ /mnt/home/.aws"]
+"init:doctl" = ["ln -s -t ~/.config '/mnt/home/Library/Application Support/doctl'"]
