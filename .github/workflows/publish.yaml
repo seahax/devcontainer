@@ -11,7 +11,7 @@ on:
     paths-ignore:
       - ".devcontainer/**"
       - ".devcontainer.json"
-      - "README.md"
+      - "*.md"
       - "mise.toml"
   schedule:
     - cron: "0 0 1 * *" # Monthly
