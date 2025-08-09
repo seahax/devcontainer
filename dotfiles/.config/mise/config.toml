@@ -1,5 +1,3 @@
 [settings]
 color = false
-
-[tools]
-usage = "latest"
+jobs = 1
