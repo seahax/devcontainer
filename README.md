@@ -3,71 +3,78 @@
 Docker image for VSCode dev containers.
 
 - [Installation](#installation)
-  - [On Create Hook](#on-create-hook)
-- [Tool Management](#tool-management)
-- [ZSH Startup Configuration](#zsh-startup-configuration)
+- [Bootstrapping](#bootstrapping)
+  - [Install project tools.](#install-project-tools)
+  - [Run initialization tasks.](#run-initialization-tasks)
+- [ZSH Configuration](#zsh-configuration)
 - [Port Forwarding](#port-forwarding)
 
 
 ## Installation
 
-1. Copy the [.devcontainer.json](.devcontainer.json) file from this repo, into the root of your project repo. This should be the only _required_ configuration.
-2. (Optional) Add a [mise.toml](#tools-mise) to the repo root with tool version configurations for your project.
-3. (Optional) Copy the [PREREQUISITES.md](PREREQUISITES.md) file into the project repo.
+1. Copy the recommended [.devcontainer.json](.devcontainer.json) file into your project.
+2. (Optional) Add a [mise.toml](#tools-mise) file to your project.
+3. (Optional) Copy the [PREREQUISITES.md](PREREQUISITES.md) file into your project.
 4. Complete the [prerequisites](PREREQUISITES.md) to make sure your system (host) is ready to run dev containers.
 5. Open the repo root directory in VSCode (if you haven't already).
 6. Open the command palette (Command+Shift+P or Control+Shift+P) and select "Reopen in Container".
 
-Rebuild the dev container occasionally to pull in any updates.
+Rebuild the dev container occasionally to pull in container updates. Rebuilding is also a good way to "reset" if something isn't behaving as expected (ie. turning it off and on again).
 
-### On Create Hook
+## Bootstrapping
 
-The recommended [.devcontainer.json](.devcontainer.json) file includes an `onCreateCommand` hook that runs the `~/.devcontainer-on-create.zsh` script which is built-in to the image. That script does two things:
+The recommended dev container config includes an `onCreateCommand` hook that executes the `~/.bootstrap.zsh` script that is embedded in the dev container image. This script performs the following actions inside the dev container on container creation:
 
-1. It _sequentially_ runs all commands in the dev container config `customizations.$onCommandConfigs` array.
-2. It automatically installs your required tools (see the [Tool Management](#tool-management) section).
+1. Install project tools.
+2. Run initialization tasks.
 
-Example: Sharing NPM credentials (and config) with the host.
+### Install project tools.
 
-```json
-{
-  // Run the built-in on-create script.
-  "onCreateCommand": "~/.devcontainer-on-create.zsh",
-  "mounts": [
-    // Mount the host's home directory in the dev container.
-    "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/mnt/home,type=bind"
-  ],
-  "customizations": {
-    "$onCreateCommands": [
-      // Share the host's NPM credentials (and config).
-      "ln -s /mnt/home/.npmrc ~/.npmrc",
-      // Run mise install early so that NPM is available.
-      "mise install -y",
-      // Restore JS dependencies with credentials.
-      "npm install"
-    ]
-  }
-}
-```
-
-## Tool Management
-
-[Mise](https://mise.com) is installed in the dev container image. Add a `mise.toml` file to the root of your repo to have tools installed automatically after the dev container is built (See the [On Create Hook](#on-create-hook) section)
+Define [Mise tools](https://mise.jdx.dev/dev-tools/) to automatically install on container creation.
 
 ```toml
 [tools]
-# NPM before Node, so that PATH resolution finds the correct NPM version.
+# NPM is before Node so that the explicitly installed version is resolved
+# before the version that is bundled with Node ($PATH ordering).
 npm = "latest"
-node = "lts"
+node = "22"
 ```
 
-## ZSH Startup Configuration
+You can also apply changes to the Mise config file immediately by running the `mise install` command.
 
-You can extend the ZSH configuration for this dev container.
+### Run initialization tasks.
 
-- The dev container `.zprofile` sources the host `.devcontainer/zprofile` file.
-- The dev container `.zshrc` sources the host `.devcontainer/zshrc` file.
+Define [Mise `init:**` tasks](https://mise.jdx.dev/tasks/) to automatically run on container creation.
+
+The recommended dev container config mounts the host's home directory inside the dev container at `/mnt/home`. This is useful for sharing configuration files with the host by symlinking them into the correct location in the dev container.
+
+```toml
+[tasks]
+# Example: Share AWS configuration with the host.
+"init:aws" = "ln -s -t ~ /mnt/home/.aws"
+```
+
+Initialization tasks are similar to adding additional commands to the the dev container `onCreateCommand` hook, but with the following differences:
+
+- Tools and basic configs are setup first.
+- Init tasks are run serially (when run automatically on container creation).
+- Tasks can also be executed manually.
+- Task ordering is configurable (alphabetical by default).
+
+## ZSH Configuration
+
+The ZSH configuration for this dev container can be extended from the host, and from the project source (ie. the cloned repository).
+
+- The built-in `~/.zshenv` script sources...
+  - `/mnt/home/.devcontainer/zshenv`
+  - `/workspace/<name>/.devcontainer/zshenv`
+- The built-in `~/.zprofile` script sources...
+  - `/mnt/home/.devcontainer/zprofile`
+  - `/workspace/<name>/.devcontainer/zprofile`
+- The built-in `~/.zshrc` script sources...
+  - `/mnt/home/.devcontainer/zshrc`
+  - `/workspace/<name>/.devcontainer/zshrc`
 
 ## Port Forwarding
 
-The dev container is configured to automatically forward ports when processes in the container start listening for connections.
+The dev container VSCode settings are set to automatically forward ports when processes in the container start listening for connections.
