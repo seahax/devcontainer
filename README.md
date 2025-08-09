@@ -9,7 +9,6 @@ Docker image for VSCode dev containers.
 - [ZSH Configuration](#zsh-configuration)
 - [Port Forwarding](#port-forwarding)
 
-
 ## Installation
 
 1. Copy the recommended [.devcontainer.json](.devcontainer.json) file into your project.

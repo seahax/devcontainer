@@ -23,7 +23,7 @@ Install the VSCode [Dev Containers](https://marketplace.visualstudio.com/items?i
 
 ## SSH Agent
 
-This is used for SSH with public key auth, including Git (over SSH). You must have an SSH private key (eg. `$HOME/.ssh/id_ed25519`)
+This is used for SSH with public key auth, including Git (over SSH). You must have an SSH private key (eg. `~/.ssh/id_ed25519`)
 
 1. Ensure the `AllowAgentForwarding` option is set to `yes`.
    - Restart the computer if you change this option.
