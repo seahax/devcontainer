@@ -10,7 +10,7 @@ ZSH_THEME=devcontainers
 DISABLE_UNTRACKED_FILES_DIRTY=true
 DISABLE_MAGIC_FUNCTIONS=true
 DISABLE_AUTO_TITLE=true
-plugins=(git asdf aws vscode)
+plugins=(vscode git mise)
 zstyle ':omz:update' mode disabled
 zstyle ":completion:*:commands" rehash 1
 source $ZSH/oh-my-zsh.sh
