@@ -16,7 +16,8 @@ fi
 zsh -l -c "$(cat <<'EOF'
 mise trust --yes --all
 mise install --yes --jobs=1
-mise use --yes --global usage
+# The `usage` tool is required for zsh completions.
+mise use --yes --global usage &>/dev/null
 for INIT_TASK in "${(@f)$(mise tasks ls --hidden --local --json | jq -r '.[].name' | { grep -E '^devcontainer_init([:_]|$)' || true })}"; do
   mise run --jobs=1 --continue-on-error --no-cache "$INIT_TASK"
 done
