@@ -2,3 +2,5 @@
 color = false
 auto_install = false
 jobs = 1
+unix_default_inline_shell_args = "zsh -o errexit -c"
+unix_default_file_shell_args = "zsh"
