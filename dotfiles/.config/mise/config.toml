@@ -1,6 +1,7 @@
 [settings]
-color = false
+# Improve predictability.
 auto_install = false
 jobs = 1
+# Standardize to ZSH to match the dev container terminal shell.
 unix_default_inline_shell_args = "zsh -o errexit -c"
 unix_default_file_shell_args = "zsh"
