@@ -14,10 +14,12 @@ fi
 
 # Install tools and run init tasks inside a (non-interactive) login shell.
 zsh -l -c "$(cat <<'EOF'
-mise trust --yes --all
-mise install --yes --jobs=1
+echo "Installing tools"
+mise trust --quiet --yes --all
+mise install --quiet --yes --jobs=1
 # The `usage` tool is required for zsh completions.
-mise use --yes --global usage &>/dev/null
+mise use --silent --yes --global usage &>/dev/null
+echo "Running init tasks"
 for INIT_TASK in "${(@f)$(mise tasks ls --hidden --local --json | jq -r '.[].name' | { grep -E '^devcontainer_init([:_]|$)' || true })}"; do
   mise run --jobs=1 --continue-on-error --no-cache "$INIT_TASK"
 done
