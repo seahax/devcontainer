@@ -20,5 +20,5 @@ WORKDIR /home/vscode
 COPY --chown=vscode:vscode dotfiles/ ./
 RUN sudo chsh -s /usr/bin/zsh vscode
 
-# Use login shell (ignored in dev container)
-ENTRYPOINT ["/usr/bin/zsh", "-l"]
+# Use login interactive shell (ignored in dev container)
+ENTRYPOINT ["/usr/bin/zsh", "--login", "--interactive"]
