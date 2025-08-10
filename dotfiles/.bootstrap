@@ -11,8 +11,8 @@ ln -s -t ~/.cache /mnt/home/.cache/mise
 # Install tools and run init tasks inside a (non-interactive) login shell.
 zsh -l -c "$(cat <<'EOF'
 mise trust --yes --all
-mise use --yes --global usage
 mise install --yes --jobs=1
+mise use --yes --global usage
 for INIT_TASK in "${(@f)$(mise tasks ls --hidden --local --json | jq -r '.[].name' | { grep -E '^devcontainer_init([:_]|$)' || true })}"; do
   mise run --jobs=1 --continue-on-error --no-cache "$INIT_TASK"
 done
