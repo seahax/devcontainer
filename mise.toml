@@ -7,6 +7,7 @@ aws = "latest"
 [env]
 AWS_PROFILE = "seahax"
 AWS_REGION = "us-east-1"
+AWS_PAGER = ""
 
 [tasks]
 build = "docker build --progress=plain -t seahax/devcontainer ."
