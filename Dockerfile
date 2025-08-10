@@ -4,10 +4,10 @@ ARG TARGETARCH
 # Run setup scripts
 COPY setupfiles /tmp/setupfiles
 WORKDIR /tmp/setupfiles
-RUN ./0-apt-init
-RUN ./1-enable-man-pages
-RUN ./2-install-packages
-RUN ./3-apt-cleanup
+RUN ./0-apt-init.zsh
+RUN ./1-enable-man-pages.zsh
+RUN ./2-install-packages.zsh
+RUN ./3-apt-cleanup.zsh
 WORKDIR /
 RUN rm -rf /tmp/setupfiles
 
