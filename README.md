@@ -29,7 +29,7 @@ The recommended dev container config includes an `onCreateCommand` hook that exe
 
 ### Install project tools.
 
-Define [Mise tools](https://mise.jdx.dev/dev-tools/) to automatically install on container creation.
+Define [Mise tools](https://mise.jdx.dev/dev-tools/) to be automatically installed after container creation.
 
 ```toml
 [tools]
@@ -43,24 +43,20 @@ You can also apply changes to the Mise config file immediately by running the `m
 
 ### Run initialization tasks.
 
-Define [Mise `init:**` tasks](https://mise.jdx.dev/tasks/) to automatically run on container creation.
-
-The recommended dev container config mounts the host's home directory inside the dev container at `/mnt/home`. This is useful for sharing configuration files with the host by symlinking them into the correct location in the dev container.
+Define [Mise tasks](https://mise.jdx.dev/tasks/) named `devcontainer_init`, `devcontainer_init_*`, or `devcontainer_init:**`, to be automatically run after container creation.
 
 ```toml
-[tasks]
-# Example: Share AWS configuration with the host.
-"init:aws" = "ln -s -t ~ /mnt/home/.aws"
+[tasks.devcontainer_init]
+hide = true
+run = [
+  # Share NPM configuration with the host.
+  "ln -s -t ~ /mnt/home/.npmrc"
+  # Restore NPM dependencies.
+  "npm install"
+]
 ```
 
-Initialization tasks are similar to adding additional commands to the the dev container `onCreateCommand` hook, but with the following differences:
-
-- Tools and basic configs are setup first.
-- Init tasks are run inside a (non-interactive) login shell.
-- Init tasks are run serially (when run automatically on container creation).
-- Init tasks can also be executed manually.
-- Task ordering is configurable (alphabetical by default).
-
+The recommended dev container config mounts the host's home directory inside the dev container at `/mnt/home`. This is useful for sharing configuration files with the host by symlinking them into the correct location in the dev container.
 
 ## ZSH Configuration
 
