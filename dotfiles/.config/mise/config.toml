@@ -1,3 +1,4 @@
 [settings]
 color = false
+auto_install = false
 jobs = 1
