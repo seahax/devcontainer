@@ -6,6 +6,7 @@
 
 export LANG=en_US.UTF-8
 export EDITOR=vim
+export GIT_EDITOR=vim
 export NPM_CONFIG_GLOBALCONFIG=/etc/npmrc
 
 path=($HOME/.local/share/mise/shims $path)
