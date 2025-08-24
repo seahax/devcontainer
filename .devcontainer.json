@@ -1,6 +1,5 @@
 {
-  // "image": "ghcr.io/seahax/devcontainer:latest",
-  "dockerFile": "Dockerfile",
+  "image": "ghcr.io/seahax/devcontainer:latest",
   "runArgs": ["--name=devcontainer-${devcontainerId}"],
   // Pull an updated image before (re-)building the dev container.
   "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest || true",
