@@ -1,5 +1,6 @@
 {
-  "image": "ghcr.io/seahax/devcontainer:latest",
+  // "image": "ghcr.io/seahax/devcontainer:latest",
+  "dockerFile": "Dockerfile",
   "runArgs": ["--name=devcontainer-${devcontainerId}"],
   // Pull an updated image before (re-)building the dev container.
   "initializeCommand": "docker pull ghcr.io/seahax/devcontainer:latest || true",
@@ -35,7 +36,8 @@
         "yzhang.markdown-all-in-one",
         "ms-azuretools.vscode-containers",
         "qezhu.gitlink",
-        "Anthropic.claude-code"
+        "Anthropic.claude-code",
+        "humao.rest-client"
       ],
       "settings": {
         "remote.autoForwardPorts": true,
