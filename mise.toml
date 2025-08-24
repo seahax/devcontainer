@@ -3,6 +3,7 @@ npm = "latest"
 node = "lts"
 doctl = "latest"
 aws = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
 
 [env]
 AWS_PROFILE = "seahax"
